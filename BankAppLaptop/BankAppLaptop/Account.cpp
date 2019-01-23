@@ -57,6 +57,12 @@ void Account::Withdraw()
 	int amount;
 	cin >> amount;
 
+	Withdraw(amount);
+}
+
+
+void Account::Withdraw(int amount)
+{
 	if (balance > amount)
 	{
 		balance -= amount;

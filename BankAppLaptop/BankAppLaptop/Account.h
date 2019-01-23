@@ -10,6 +10,7 @@ public:
 	int GetBalance();
 	void Deposit();
 	void Withdraw();
+	void Withdraw(int amount);
 
 private:
 	int customerID;

@@ -8,7 +8,7 @@
 using namespace std;
 
 
-UserInterface::UserInterface(Data newData) : data(newData)
+UserInterface::UserInterface(Data* newData, Loan* newLoan, Interest* newInterest) : data(newData), loan(newLoan), interest(newInterest)
 {
 }
 
@@ -40,7 +40,7 @@ void UserInterface::CustomerSelection()
 		}
 		else
 		{
-			viewedCustomer = data.GetCustomer(customerID);
+			viewedCustomer = data->GetCustomer(customerID);
 			if (viewedCustomer != nullptr)
 			{
 				AccountSelection();
@@ -65,7 +65,7 @@ void UserInterface::AccountSelection()
 
 		cout << "Account numbers held: ";
 		cout << endl;
-		data.PrintAccountNumbers(viewedCustomer->GetCustomerID());
+		data->PrintAccountNumbers(viewedCustomer->GetCustomerID());
 
 		cout << "Please select an account. (0 to cancel)" << endl;
 		int accountNumber = 0;
@@ -77,7 +77,7 @@ void UserInterface::AccountSelection()
 		}
 		else
 		{
-			viewedAccount = data.GetAccount(accountNumber);
+			viewedAccount = data->GetAccount(accountNumber);
 			if (viewedAccount != nullptr &&
 				viewedAccount->GetCustomerID() == viewedCustomer->GetCustomerID())
 			{
@@ -105,6 +105,9 @@ void UserInterface::AccountOptions()
 		cout << "Please choose an action:" << endl;
 		cout << "1: withdraw money" << endl;
 		cout << "2: deposit money" << endl;
+		cout << "3: withdraw 10" << endl;
+		cout << "4: calculate interest" << endl;
+		cout << "5: calculate loan" << endl;
 		cout << "0: cancel" << endl;
 		cin >> menuChoice;
 
@@ -115,6 +118,18 @@ void UserInterface::AccountOptions()
 		else if (menuChoice == 2)
 		{
 			viewedAccount->Deposit();
+		}
+		else if (menuChoice == 3)
+		{
+			viewedAccount->Withdraw(10);
+		}
+		else if (menuChoice == 4)
+		{
+			interest->CalculateInterest(viewedAccount);
+		}
+		else if (menuChoice == 5)
+		{
+			loan->CalculateLoan(viewedAccount);
 		}
 		else if (menuChoice == 0)
 		{
