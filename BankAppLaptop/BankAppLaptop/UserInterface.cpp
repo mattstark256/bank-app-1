@@ -108,6 +108,7 @@ void UserInterface::AccountOptions()
 		cout << "3: withdraw 10" << endl;
 		cout << "4: calculate interest" << endl;
 		cout << "5: calculate loan" << endl;
+		cout << "6: assign a credit card" << endl;
 		cout << "0: cancel" << endl;
 		cin >> menuChoice;
 
@@ -130,6 +131,10 @@ void UserInterface::AccountOptions()
 		else if (menuChoice == 5)
 		{
 			loan->CalculateLoan(viewedAccount);
+		}
+		else if (menuChoice == 6)
+		{
+			viewedAccount->AddCreditCard();
 		}
 		else if (menuChoice == 0)
 		{

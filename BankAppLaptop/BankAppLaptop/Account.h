@@ -1,4 +1,6 @@
 #pragma once
+#include "CreditCard.h"
+
 class Account
 {
 public:
@@ -11,10 +13,12 @@ public:
 	void Deposit();
 	void Withdraw();
 	void Withdraw(int amount);
+	void AddCreditCard();
 
 private:
 	int customerID;
 	int accountNumber;
 	int balance;
+	CreditCard* creditCard;
 };
 

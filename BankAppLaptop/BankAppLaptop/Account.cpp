@@ -80,3 +80,37 @@ void Account::Withdraw(int amount)
 		cout << endl;
 	}
 }
+
+void Account::AddCreditCard()
+{
+	if (creditCard != nullptr)
+	{
+		cout << "This account already has a credit card assigned to it.";
+		cout << endl;
+	}
+	else
+	{
+		cout << "What should the overdraft of the card be?";
+		cout << endl;
+		int overdraft;
+		cin >> overdraft;
+
+		if (overdraft > balance)
+		{
+			cout << "This account only holds ";
+			cout << balance;
+			cout << ". You can't have an overdraft greater than the account balance.";
+			cout << endl;
+		}
+		else
+		{
+			// I'm using the variable newCard because you can't get the address of something in the same statement as the constructor. I'm using a pointer so I can check if creditCard is null.
+			CreditCard newCard = CreditCard(overdraft);
+			creditCard = &newCard;
+			cout << "This account now has a credit card with an overdraft of ";
+			cout << overdraft;
+			cout << ".";
+			cout << endl;
+		}
+	}
+}

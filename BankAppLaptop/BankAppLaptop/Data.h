@@ -2,6 +2,7 @@
 
 #include "Customer.h"
 #include "Account.h"
+#include <vector>
 
 
 class Data
@@ -15,16 +16,28 @@ public:
 	void PrintAccountNumbers(int customerID);
 
 private:
-	int customerCount = 3;
-	Customer customers[3] = {
-		Customer(1, "Onedeline"),
-		Customer(2, "Twoopsie"),
-		Customer(3, "Threena") };
+
+	Account account1 = Account(1, 5, 544);
+	Account account2 = Account(2, 8, 6599);
+	Account account3 = Account(2, 2, 78549);
+	Account account4 = Account(3, 1, 2445);
+
+	//ArrayList customers = new ArrayList();
+
+	//int customerCount = 3;
+	/*Customer *customers[3] = {
+		&customer1,
+		&customer2,
+		&customer3 };*/
+
+	vector<Customer*> customersVector;
+	vector<int> numbersVector;
+
 	int accountCount = 4;
-	Account accounts[4] = {
-		Account(1, 5, 544),
-		Account(2, 8, 6599),
-		Account(2, 2, 78549),
-		Account(3, 1, 2445) };
+	Account *accounts[4] = {
+		&account1,
+		&account2,
+		&account3,
+		&account4 };
 };
 
