@@ -1,2 +1,11 @@
-﻿  Data.cpp
-  BankAppLaptop.vcxproj -> M:\Coursework\CMP102 Software Design\Week 2\bank-app-1\BankAppLaptop\Debug\BankAppLaptop.exe
+﻿  BankAppLaptop.cpp
+c:\users\matt\documents\misc\abertay\coursework\1st year\cmp102 software design\bank app\bank-app-1\bankapplaptop\bankapplaptop\interest.h(15): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Data.cpp
+c:\users\matt\documents\misc\abertay\coursework\1st year\cmp102 software design\bank app\bank-app-1\bankapplaptop\bankapplaptop\data.cpp(28): warning C4018: '<': signed/unsigned mismatch
+c:\users\matt\documents\misc\abertay\coursework\1st year\cmp102 software design\bank app\bank-app-1\bankapplaptop\bankapplaptop\data.cpp(42): warning C4018: '<': signed/unsigned mismatch
+c:\users\matt\documents\misc\abertay\coursework\1st year\cmp102 software design\bank app\bank-app-1\bankapplaptop\bankapplaptop\data.cpp(61): warning C4018: '<': signed/unsigned mismatch
+c:\users\matt\documents\misc\abertay\coursework\1st year\cmp102 software design\bank app\bank-app-1\bankapplaptop\bankapplaptop\data.cpp(83): warning C4018: '<': signed/unsigned mismatch
+  UserInterface.cpp
+c:\users\matt\documents\misc\abertay\coursework\1st year\cmp102 software design\bank app\bank-app-1\bankapplaptop\bankapplaptop\interest.h(15): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Generating Code...
+  BankAppLaptop.vcxproj -> C:\Users\Matt\Documents\misc\Abertay\Coursework\1st year\CMP102 Software Design\Bank app\bank-app-1\BankAppLaptop\Debug\BankAppLaptop.exe

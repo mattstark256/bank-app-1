@@ -8,16 +8,13 @@ using namespace std;
 Data::Data()
 {
 	customersVector.push_back(new Customer(1, "Jane"));
+	customersVector.push_back(new Customer(2, "Twolip"));
+	customersVector.push_back(new Customer(3, "Threena"));
 
-	Customer customer2 = Customer(2, "Twolip");
-	customersVector.push_back(&customer2);
-
-
-
-	//customersVector.p
-	cout << "called Data constructor\n";
-	cout << customersVector[0]->GetCustomerID();
-	cout << endl;
+	accountsVector.push_back(new Account(1, 1, 544));
+	accountsVector.push_back(new Account(2, 3, 6599));
+	accountsVector.push_back(new Account(2, 5, 78549));
+	accountsVector.push_back(new Account(3, 2, 2445));
 }
 
 
@@ -28,72 +25,71 @@ Data::~Data()
 
 Customer* Data::GetCustomer(int customerID)
 {
-	cout << "called GetCustomer\n";
-	cout << customersVector[1]->GetName();
-	cout << endl;
-
+	for (int i = 0; i < customersVector.size(); i++)
+	{
+		Customer* customer = customersVector[i];
+		if (customersVector[i]->GetCustomerID() == customerID)
+		{
+			return customersVector[i];
+		}
+	}
 	return nullptr;
-
-
-	//if (customersVector.size() > 0)
-	//{
-	//	//Customer* customer = customersVector.at(0);
-	//	Customer* customer = customersVector[0];
-	//	if (customer != nullptr)
-	//	{
-	//		//cout << customer->GetName();
-	//		cout << customer->GetCustomerID();
-	//	}
-	//	else
-	//	{
-	//		cout << "value is null\n";
-	//	}
-	//}
-	//else
-	//{
-	//	cout << "outside range\n";
-	//}
-
-
-	//return customersVector[0];
-
-	//for (int i = 0; i < 3; i++)
-	//	//for (int i = 0; i < customersVector.size(); i++)
-	//{
-	//	Customer* customer = customersVector[i];
-	//	int test = customer->GetCustomerID();
-	//	cout << test;
-	//	if (customersVector[i]->GetCustomerID() == customerID)
-	//	{
-	//		return customersVector[i];
-	//	}
-	//}
-	//return nullptr;
 }
 
 
 Account* Data::GetAccount(int accountNumber)
 {
-	for (int i = 0; i < accountCount; i++)
+	for (int i = 0; i < accountsVector.size(); i++)
 	{
-		if (accounts[i]->GetAccountNumber() == accountNumber)
+		if (accountsVector[i]->GetAccountNumber() == accountNumber)
 		{
-			return accounts[i];
+			return accountsVector[i];
 		}
 	}
 	return nullptr;
 }
 
 
+void Data::AddAccount(Account * newAccount)
+{
+	accountsVector.push_back(newAccount);
+}
+
+
 void Data::PrintAccountNumbers(int customerID)
 {
-	for (int i = 0; i < accountCount; i++)
+	for (int i = 0; i < accountsVector.size(); i++)
 	{
-		if (accounts[i]->GetCustomerID() == customerID)
+		if (accountsVector[i]->GetCustomerID() == customerID)
 		{
-			cout << accounts[i]->GetAccountNumber();
+			cout << accountsVector[i]->GetAccountNumber();
 			cout << endl;
 		}
 	}
 	return;
+}
+
+
+// Returns the lowest available account number
+int Data::GetNewAccountNumber()
+{
+	int newAccountNumber = 1; // All account numbers should be integers above 0
+
+	// Repeatedly iterate through all existing accounts until newAccountNumber doesn't match any of them
+	bool accountNumberChanged = false;
+	do
+	{
+		accountNumberChanged = false;
+		for (int i = 0; i < accountsVector.size(); i++)
+		{
+			if (accountsVector[i]->GetAccountNumber() == newAccountNumber)
+			{
+				newAccountNumber++;
+				accountNumberChanged = true;
+			}
+		}
+	}
+	while (accountNumberChanged);
+
+	return newAccountNumber;
 }

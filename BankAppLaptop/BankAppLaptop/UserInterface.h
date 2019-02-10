@@ -14,13 +14,15 @@ public:
 
 private:
 	Data* data;
-	Customer* viewedCustomer;
-	Account* viewedAccount;
+	Customer* selectedCustomer;
+	Account* selectedAccount;
 	Loan* loan;
 	Interest* interest;
 
 	void CustomerSelection();
+	void CustomerOptions();
 	void AccountSelection();
 	void AccountOptions();
+	void AddNewAccount();
 };
 

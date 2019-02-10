@@ -25,6 +25,7 @@ void UserInterface::StartSession()
 }
 
 
+// Select a customer by Customer ID
 void UserInterface::CustomerSelection()
 {
 	bool quitting = false;
@@ -40,10 +41,10 @@ void UserInterface::CustomerSelection()
 		}
 		else
 		{
-			viewedCustomer = data->GetCustomer(customerID);
-			if (viewedCustomer != nullptr)
+			selectedCustomer = data->GetCustomer(customerID);
+			if (selectedCustomer != nullptr)
 			{
-				AccountSelection();
+				CustomerOptions();
 			}
 			else
 			{
@@ -54,18 +55,48 @@ void UserInterface::CustomerSelection()
 }
 
 
-void UserInterface::AccountSelection()
+// Select an action to take for the customer
+void UserInterface::CustomerOptions()
 {
 	bool quitting = false;
 	while (!quitting)
 	{
 		cout << "Customer name: ";
-		cout << viewedCustomer->GetName();
+		cout << selectedCustomer->GetName();
 		cout << endl;
 
+		int menuChoice;
+		cout << "Please choose an action:" << endl;
+		cout << "1: Manage existing accounts" << endl;
+		cout << "2: Create new account" << endl;
+		cout << "0: Cancel" << endl;
+		cin >> menuChoice;
+
+		if (menuChoice == 1)
+		{
+			AccountSelection();
+		}
+		else if (menuChoice == 2)
+		{
+			AddNewAccount();
+		}
+		else if (menuChoice == 0)
+		{
+			quitting = true;
+		}
+	}
+}
+
+
+// Select one of the customer's accounts by account number
+void UserInterface::AccountSelection()
+{
+	bool quitting = false;
+	while (!quitting)
+	{
 		cout << "Account numbers held: ";
 		cout << endl;
-		data->PrintAccountNumbers(viewedCustomer->GetCustomerID());
+		data->PrintAccountNumbers(selectedCustomer->GetCustomerID());
 
 		cout << "Please select an account. (0 to cancel)" << endl;
 		int accountNumber = 0;
@@ -77,9 +108,9 @@ void UserInterface::AccountSelection()
 		}
 		else
 		{
-			viewedAccount = data->GetAccount(accountNumber);
-			if (viewedAccount != nullptr &&
-				viewedAccount->GetCustomerID() == viewedCustomer->GetCustomerID())
+			selectedAccount = data->GetAccount(accountNumber);
+			if (selectedAccount != nullptr &&
+				selectedAccount->GetCustomerID() == selectedCustomer->GetCustomerID())
 			{
 				AccountOptions();
 			}
@@ -92,53 +123,67 @@ void UserInterface::AccountSelection()
 }
 
 
+// Select an action to take with the account
 void UserInterface::AccountOptions()
 {
 	bool quitting = false;
 	while (!quitting)
 	{
 		cout << "Balance: ";
-		cout << viewedAccount->GetBalance();
+		cout << selectedAccount->GetBalance();
 		cout << endl;
 
 		int menuChoice;
 		cout << "Please choose an action:" << endl;
-		cout << "1: withdraw money" << endl;
-		cout << "2: deposit money" << endl;
-		cout << "3: withdraw 10" << endl;
-		cout << "4: calculate interest" << endl;
-		cout << "5: calculate loan" << endl;
-		cout << "6: assign a credit card" << endl;
-		cout << "0: cancel" << endl;
+		cout << "1: Withdraw money" << endl;
+		cout << "2: Deposit money" << endl;
+		cout << "3: Withdraw 10" << endl;
+		cout << "4: Calculate interest" << endl;
+		cout << "5: Calculate loan" << endl;
+		cout << "6: Assign a credit card" << endl;
+		cout << "0: Cancel" << endl;
 		cin >> menuChoice;
 
 		if (menuChoice == 1)
 		{
-			viewedAccount->Withdraw();
+			selectedAccount->Withdraw();
 		}
 		else if (menuChoice == 2)
 		{
-			viewedAccount->Deposit();
+			selectedAccount->Deposit();
 		}
 		else if (menuChoice == 3)
 		{
-			viewedAccount->Withdraw(10);
+			selectedAccount->Withdraw(10);
 		}
 		else if (menuChoice == 4)
 		{
-			interest->CalculateInterest(viewedAccount);
+			interest->CalculateInterest(selectedAccount);
 		}
 		else if (menuChoice == 5)
 		{
-			loan->CalculateLoan(viewedAccount);
+			loan->CalculateLoan(selectedAccount);
 		}
 		else if (menuChoice == 6)
 		{
-			viewedAccount->AddCreditCard();
+			selectedAccount->AddCreditCard();
 		}
 		else if (menuChoice == 0)
 		{
 			quitting = true;
 		}
 	}
+}
+
+
+// Create a new account for the customer
+void UserInterface::AddNewAccount()
+{
+	int newAccountNumber = data->GetNewAccountNumber();
+	data->AddAccount(new Account(selectedCustomer->GetCustomerID(), newAccountNumber, 0));
+
+	cout << "Created new account with account number ";
+	cout << newAccountNumber;
+	cout << " and a balance of 0.";
+	cout << endl;
 }
