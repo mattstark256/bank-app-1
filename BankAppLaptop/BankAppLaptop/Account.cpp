@@ -41,11 +41,13 @@ void Account::Deposit()
 	cout << endl;
 	int amount;
 	cin >> amount;
+	cout << endl;
 
 	balance += amount;
 
 	cout << amount;
 	cout << " has been deposited.";
+	cout << endl;
 	cout << endl;
 }
 
@@ -56,6 +58,7 @@ void Account::Withdraw()
 	cout << endl;
 	int amount;
 	cin >> amount;
+	cout << endl;
 
 	Withdraw(amount);
 }
@@ -63,7 +66,7 @@ void Account::Withdraw()
 
 void Account::Withdraw(int amount)
 {
-	if (balance > amount)
+	if (balance >= amount)
 	{
 		balance -= amount;
 
@@ -77,8 +80,10 @@ void Account::Withdraw(int amount)
 		cout << amount;
 		cout << " because the account only holds ";
 		cout << balance;
+		cout << ".";
 		cout << endl;
 	}
+	cout << endl;
 }
 
 void Account::AddCreditCard()
@@ -94,6 +99,7 @@ void Account::AddCreditCard()
 		cout << endl;
 		int overdraft;
 		cin >> overdraft;
+		cout << endl;
 
 		if (overdraft > balance)
 		{
@@ -113,4 +119,10 @@ void Account::AddCreditCard()
 			cout << endl;
 		}
 	}
+	cout << endl;
+}
+
+AccountType Account::getAccountType()
+{
+	return accountType;
 }

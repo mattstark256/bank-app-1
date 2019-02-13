@@ -10,7 +10,7 @@
 using namespace std;
 
 
-UserInterface::UserInterface(Data* newData, Loan* newLoan, Interest* newInterest) : data(newData), loan(newLoan), interest(newInterest)
+UserInterface::UserInterface(Data* newData, Interest* newInterest) : data(newData), interest(newInterest)
 {
 }
 
@@ -23,6 +23,7 @@ UserInterface::~UserInterface()
 void UserInterface::StartSession()
 {
 	cout << "Welcome to the Bank of Abertay!" << endl;
+	cout << endl;
 	CustomerSelection();
 }
 
@@ -36,6 +37,7 @@ void UserInterface::CustomerSelection()
 		cout << "Please enter your customer ID. (0 to quit)" << endl;
 		int customerID = 0;
 		cin >> customerID;
+		cout << endl;
 
 		if (customerID == 0)
 		{
@@ -63,6 +65,10 @@ void UserInterface::CustomerOptions()
 	bool quitting = false;
 	while (!quitting)
 	{
+		cout << "Customer ID: ";
+		cout << selectedCustomer->GetCustomerID();
+		cout << endl;
+
 		cout << "Customer name: ";
 		cout << selectedCustomer->GetName();
 		cout << endl;
@@ -73,6 +79,7 @@ void UserInterface::CustomerOptions()
 		cout << "2: Create new account" << endl;
 		cout << "0: Cancel" << endl;
 		cin >> menuChoice;
+		cout << endl;
 
 		if (menuChoice == 1)
 		{
@@ -103,6 +110,7 @@ void UserInterface::AccountSelection()
 		cout << "Please select an account. (0 to cancel)" << endl;
 		int accountNumber = 0;
 		cin >> accountNumber;
+		cout << endl;
 
 		if (accountNumber == 0)
 		{
@@ -131,16 +139,24 @@ void UserInterface::AccountOptions()
 	bool quitting = false;
 	while (!quitting)
 	{
+		cout << "Account number: ";
+		cout << selectedAccount->GetAccountNumber();
+		cout << endl;
 
-
-		// I should use an accounttype variable to check
-		/*if (myStudentAccount != nullptr)
+		cout << "Account type: ";
+		switch (selectedAccount->getAccountType())
 		{
-			StudentAccount *myStudentAccount = static_cast <StudentAccount*>(selectedAccount);
-			cout << "It's a student account." << endl;
-			myStudentAccount->TestFunction();
-		}*/
-		
+		case Regular :
+			std::cout << "Regular account";
+			break;
+		case Student :
+			std::cout << "Student account";
+			break;
+		case Business :
+			std::cout << "Business account";
+			break;
+		}
+		cout << endl;
 
 		cout << "Balance: ";
 		cout << selectedAccount->GetBalance();
@@ -152,15 +168,20 @@ void UserInterface::AccountOptions()
 		cout << "2: Deposit money" << endl;
 		cout << "3: Withdraw 10" << endl;
 		cout << "4: Calculate interest" << endl;
-		cout << "5: Calculate loan" << endl;
-		cout << "6: Assign a credit card" << endl;
+		cout << "5: Assign a credit card" << endl;
 
-		
-		// If accounttype is student account show 7th option
-
+		if (selectedAccount->getAccountType() == Student)
+		{
+			cout << "6: Manage overdraft" << endl;
+		}
+		if (selectedAccount->getAccountType() == Business)
+		{
+			cout << "6: Manage loan" << endl;
+		}
 
 		cout << "0: Cancel" << endl;
 		cin >> menuChoice;
+		cout << endl;
 
 		if (menuChoice == 1)
 		{
@@ -180,11 +201,15 @@ void UserInterface::AccountOptions()
 		}
 		else if (menuChoice == 5)
 		{
-			loan->CalculateLoan(selectedAccount);
-		}
-		else if (menuChoice == 6)
-		{
 			selectedAccount->AddCreditCard();
+		}
+		else if (selectedAccount->getAccountType() == Student && menuChoice == 6)
+		{
+			static_cast<StudentAccount*>(selectedAccount)->ManageOverdraft();
+		}
+		else if (selectedAccount->getAccountType() == Business && menuChoice == 6)
+		{
+			static_cast<BusinessAccount*>(selectedAccount)->ManageLoan();
 		}
 		else if (menuChoice == 0)
 		{
@@ -198,10 +223,50 @@ void UserInterface::AccountOptions()
 void UserInterface::AddNewAccount()
 {
 	int newAccountNumber = data->GetNewAccountNumber();
-	data->AddAccount(new Account(selectedCustomer->GetCustomerID(), newAccountNumber, 0));
 
-	cout << "Created new account with account number ";
-	cout << newAccountNumber;
-	cout << " and a balance of 0.";
-	cout << endl;
+	bool quitting = false;
+	while (!quitting)
+	{
+		int menuChoice;
+		cout << "What type of account would you like to create?" << endl;
+		cout << "1: Regular account" << endl;
+		cout << "2: Student account" << endl;
+		cout << "3: Business account" << endl;
+		cout << "0: Cancel" << endl;
+		cin >> menuChoice;
+		cout << endl;
+
+		if (menuChoice == 1)
+		{
+			data->AddAccount(new Account(selectedCustomer->GetCustomerID(), newAccountNumber, 0));
+			cout << "Created new Regular account with account number ";
+			cout << newAccountNumber;
+			cout << " and a balance of 0.";
+			cout << endl;
+			quitting = true;
+		}
+		else if (menuChoice == 2)
+		{
+			data->AddAccount(new StudentAccount(selectedCustomer->GetCustomerID(), newAccountNumber, 0, 50));
+			cout << "Created new Student account with account number ";
+			cout << newAccountNumber;
+			cout << " and a balance of 0.";
+			cout << endl;
+			quitting = true;
+		}
+		else if (menuChoice == 3)
+		{
+			data->AddAccount(new BusinessAccount(selectedCustomer->GetCustomerID(), newAccountNumber, 0));
+			cout << "Created new Business account with account number ";
+			cout << newAccountNumber;
+			cout << " and a balance of 0.";
+			cout << endl;
+			quitting = true;
+		}
+		else if (menuChoice == 0)
+		{
+			quitting = true;
+		}
+		cout << endl;
+	}
 }

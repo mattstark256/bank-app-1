@@ -1,6 +1,8 @@
 #pragma once
 #include "CreditCard.h"
 
+enum AccountType { Regular, Business, Student };
+
 class Account
 {
 public:
@@ -12,12 +14,13 @@ public:
 	int GetBalance();
 	void Deposit();
 	void Withdraw();
-	void Withdraw(int amount);
+	virtual void Withdraw(int amount);
 	void AddCreditCard();
+	AccountType getAccountType();
 
 protected:
 	int balance;
-	int accountType = 0; // TODO change this to enum?
+	AccountType accountType = Regular;
 
 private:
 	int customerID;

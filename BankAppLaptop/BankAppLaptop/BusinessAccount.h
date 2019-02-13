@@ -7,9 +7,10 @@ public:
 	BusinessAccount(int newCustomerID, int newAccountNumber, int initialBalance);
 	~BusinessAccount();
 
-	void AddToLoan(int amount);
+	void ManageLoan();
 
 private:
+	void IncreaseLoan();
 	int loanAmount = 0;
 };
 

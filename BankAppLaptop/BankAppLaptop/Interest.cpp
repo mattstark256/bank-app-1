@@ -22,6 +22,8 @@ void Interest::CalculateInterest(Account * account)
 
 	cout << "How many years interest would you like to calculate?" << endl;
 	cin >> years;
+	cout << endl;
+
 	int interestAmount = floor(balance * pow(1 + interestRate, years) - balance);
 	cout << "The interest rate is ";
 	cout << interestRate;
@@ -29,5 +31,7 @@ void Interest::CalculateInterest(Account * account)
 	cout << years;
 	cout << " years it will earn ";
 	cout << interestAmount;
-	cout << "." << endl;
+	cout << ".";
+	cout << endl;
+	cout << endl;
 }

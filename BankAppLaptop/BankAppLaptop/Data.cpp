@@ -16,7 +16,7 @@ Data::Data()
 
 	accountsVector.push_back(new Account(1, 1, 544));
 	accountsVector.push_back(new Account(2, 3, 6599));
-	accountsVector.push_back(new StudentAccount(2, 5, 78549));
+	accountsVector.push_back(new StudentAccount(2, 5, 78549, 80));
 	accountsVector.push_back(new BusinessAccount(3, 2, 2445));
 }
 
