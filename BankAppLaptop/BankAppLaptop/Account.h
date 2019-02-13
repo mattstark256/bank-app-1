@@ -15,10 +15,13 @@ public:
 	void Withdraw(int amount);
 	void AddCreditCard();
 
+protected:
+	int balance;
+	int accountType = 0; // TODO change this to enum?
+
 private:
 	int customerID;
 	int accountNumber;
-	int balance;
 	CreditCard* creditCard;
 };
 

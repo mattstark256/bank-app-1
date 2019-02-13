@@ -4,6 +4,8 @@
 #include <iostream>
 #include "Customer.h"
 #include "Account.h"
+#include "StudentAccount.h"
+#include "BusinessAccount.h"
 
 using namespace std;
 
@@ -129,6 +131,17 @@ void UserInterface::AccountOptions()
 	bool quitting = false;
 	while (!quitting)
 	{
+
+
+		// I should use an accounttype variable to check
+		/*if (myStudentAccount != nullptr)
+		{
+			StudentAccount *myStudentAccount = static_cast <StudentAccount*>(selectedAccount);
+			cout << "It's a student account." << endl;
+			myStudentAccount->TestFunction();
+		}*/
+		
+
 		cout << "Balance: ";
 		cout << selectedAccount->GetBalance();
 		cout << endl;
@@ -141,6 +154,11 @@ void UserInterface::AccountOptions()
 		cout << "4: Calculate interest" << endl;
 		cout << "5: Calculate loan" << endl;
 		cout << "6: Assign a credit card" << endl;
+
+		
+		// If accounttype is student account show 7th option
+
+
 		cout << "0: Cancel" << endl;
 		cin >> menuChoice;
 

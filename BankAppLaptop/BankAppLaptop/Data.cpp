@@ -2,6 +2,9 @@
 #include "Data.h"
 #include <iostream>
 
+#include "StudentAccount.h"
+#include "BusinessAccount.h"
+
 using namespace std;
 
 
@@ -13,8 +16,8 @@ Data::Data()
 
 	accountsVector.push_back(new Account(1, 1, 544));
 	accountsVector.push_back(new Account(2, 3, 6599));
-	accountsVector.push_back(new Account(2, 5, 78549));
-	accountsVector.push_back(new Account(3, 2, 2445));
+	accountsVector.push_back(new StudentAccount(2, 5, 78549));
+	accountsVector.push_back(new BusinessAccount(3, 2, 2445));
 }
 
 

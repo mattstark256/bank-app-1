@@ -153,17 +153,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
+    <ClInclude Include="BusinessAccount.h" />
     <ClInclude Include="CreditCard.h" />
     <ClInclude Include="Customer.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="Interest.h" />
     <ClInclude Include="Loan.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="StudentAccount.h" />
     <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Account.cpp" />
     <ClCompile Include="BankAppLaptop.cpp" />
+    <ClCompile Include="BusinessAccount.cpp" />
     <ClCompile Include="CreditCard.cpp" />
     <ClCompile Include="Customer.cpp" />
     <ClCompile Include="Data.cpp" />
@@ -175,6 +178,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="StudentAccount.cpp" />
     <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
